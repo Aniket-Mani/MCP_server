@@ -1,0 +1,26 @@
+[project]
+name = "mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Aniket Mani", email = "aniketmani54@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "langchain[mcp]>=1.5.0",
+    "langchain-openai>=1.8.0",
+    "python-dotenv>=1.2.4",
+    "fastmcp>=4.2.0",
+]
+
+[project.scripts]
+mcp-server = "mcp_server:main"
+
+[build-system]
+requires = ["uv_build>=0.13.8,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "mcp_server"
+module-root = "src"
