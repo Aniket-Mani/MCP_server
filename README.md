@@ -2,9 +2,12 @@
 
 ### Give your AI agents the power to manage real tasks.
 
-\<p align="center">   \<strong>A Model Context Protocol (MCP) server for intelligent task management, powered by FastMCP, Python, and SQLite.\</strong> \</p>
+A Model Context Protocol (MCP) server for intelligent task management, powered by **FastMCP, Python, and SQLite.**
 
-\<p align="center">   ![Python]\([https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge\&logo=python\&logoColor=white))   ![MCP]\([https://img.shields.io/badge/Protocol-MCP-8A2BE2?style=for-the-badge](https://img.shields.io/badge/Protocol-MCP-8A2BE2?style=for-the-badge))   ![FastMCP]\([https://img.shields.io/badge/FastMCP-4.x-black?style=for-the-badge](https://img.shields.io/badge/FastMCP-4.x-black?style=for-the-badge))   ![SQLite]\([https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white](https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge\&logo=sqlite\&logoColor=white)) \</p>
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![MCP](https://img.shields.io/badge/Protocol-MCP-8A2BE2?style=for-the-badge)
+![FastMCP](https://img.shields.io/badge/FastMCP-4.x-black?style=for-the-badge)
+![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 
 ---
 
@@ -18,27 +21,25 @@ TaskFlow MCP is an MCP server that exposes task-management capabilities to AI ap
 
 Instead of manually interacting with a task database, an AI client can discover available tools, create tasks, retrieve task information, and update task statuses through MCP.
 
-The result?
-
 Your AI application doesn't just talk about getting things done. It can actually do them.
 
 ## ✨ Features
 
-- **MCP-native architecture** — Communicate with AI applications using Model Context Protocol.
-- **Dynamic tool discovery** — Clients can discover available tools through MCP.
+- **MCP-native architecture** — Standardized communication with AI applications.
+- **Dynamic tool discovery** — Discover available tools through MCP.
 - **Task creation** — Create tasks with titles, descriptions, and priorities.
-- **Task retrieval** — Retrieve existing tasks from persistent storage.
+- **Task retrieval** — Retrieve tasks from persistent storage.
 - **Status management** — Update task statuses through tool invocations.
 - **Persistent storage** — SQLite-backed task storage.
-- **Asynchronous client** — Interact with the MCP server using Python's asyncio.
-- **HTTP transport** — Connect to the server over Streamable HTTP.
+- **Asynchronous client** — Python asyncio-based client implementation.
+- **HTTP transport** — Connect through Streamable HTTP.
 
 ## 🏗️ Architecture
 
 ```mermaid
 flowchart TD
     A["AI Application / Agent"] --> B["MCP Client"]
-    B <-->|"JSON-RPC 2.0 / MCP"| C["FastMCP Server"]
+    B <-->|"MCP / JSON-RPC 2.0"| C["FastMCP Server"]
     C --> D["Tool Registry"]
 
     D --> E["create_task"]
@@ -57,20 +58,20 @@ flowchart TD
 1. An AI application connects to the MCP server through an MCP client.
 2. The client discovers available tools.
 3. The AI application selects an appropriate tool.
-4. The MCP client sends the tool invocation to the server.
+4. The client sends the tool invocation to the server.
 5. FastMCP executes the corresponding Python function.
 6. The database layer performs the requested operation.
 7. The result is returned to the client.
 
 ## 🛠️ Available MCP Tools
 
-| Tool                 | Description                            |
-| -------------------- | -------------------------------------- |
-| `create_task`        | Creates a new task                     |
-| `list_tasks`         | Retrieves stored tasks                 |
+| Tool | Description |
+|---|---|
+| `create_task` | Creates a new task |
+| `list_tasks` | Retrieves stored tasks |
 | `update_task_status` | Updates the status of an existing task |
 
-### Example: Create a task
+### Create a task
 
 ```json
 {
@@ -82,7 +83,7 @@ flowchart TD
 
 The server generates a unique task ID and persists the task in SQLite.
 
-### Example: Update task status
+### Update task status
 
 ```json
 {
@@ -93,14 +94,14 @@ The server generates a unique task ID and persists the task in SQLite.
 
 ## 🧰 Tech Stack
 
-| Technology   | Purpose                                 |
-| ------------ | --------------------------------------- |
-| Python 3.12+ | Core implementation                     |
-| FastMCP      | MCP server and client                   |
-| SQLite       | Persistent storage                      |
-| asyncio      | Asynchronous execution                  |
-| uv           | Dependency and project management       |
-| LangChain    | AI application integration dependencies |
+| Technology | Purpose |
+|---|---|
+| Python 3.12+ | Core implementation |
+| FastMCP | MCP server and client |
+| SQLite | Persistent storage |
+| asyncio | Asynchronous execution |
+| uv | Dependency and project management |
+| LangChain | AI application integration dependencies |
 
 ## 📂 Project Structure
 
@@ -129,7 +130,7 @@ MCP_server/
 
 - **`server.py`** — Initializes the FastMCP server and registers task-management tools.
 - **`client.py`** — Connects to the MCP server, discovers tools, and invokes them asynchronously.
-- **`database.py`** — Handles SQLite initialization, task persistence, retrieval, and status updates.
+- **`database.py`** — Handles SQLite initialization, persistence, retrieval, and status updates.
 - **`data/`** — Stores the local SQLite database.
 
 ## 🚀 Getting Started
@@ -143,7 +144,6 @@ MCP_server/
 
 ```bash
 git clone https://github.com/Aniket-Mani/MCP_server.git
-
 cd MCP_server
 ```
 
@@ -167,7 +167,7 @@ http://127.0.0.1:8000/mcp
 
 ### 4. Connect the MCP client
 
-Open another terminal in the project directory:
+Open another terminal:
 
 ```bash
 uv run python -m mcp_server.client
@@ -175,9 +175,9 @@ uv run python -m mcp_server.client
 
 The client connects to the running server, discovers available tools, and executes task-management operations.
 
-## 🔌 Connecting an MCP Inspector
+## 🔌 MCP Inspector
 
-You can inspect and test the server using the official MCP Inspector.
+Test and inspect your MCP server using the official [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
 
 Start the inspector:
 
@@ -187,10 +187,10 @@ npx @modelcontextprotocol/inspector
 
 Configure the connection:
 
-| Setting   | Value                       |
-| --------- | --------------------------- |
-| Transport | Streamable HTTP             |
-| URL       | `http://127.0.0.1:8000/mcp` |
+| Setting | Value |
+|---|---|
+| Transport | Streamable HTTP |
+| URL | `http://127.0.0.1:8000/mcp` |
 
 Connect and explore the available tools.
 
@@ -214,8 +214,6 @@ MCP provides the standardized communication layer between the AI application and
 
 ## 🗺️ Roadmap
 
-Potential future improvements:
-
 - [ ] Task deletion
 - [ ] Task filtering by priority and status
 - [ ] Task deadlines and scheduling
@@ -236,14 +234,5 @@ Contributions, suggestions, and improvements are welcome.
 3. Implement your changes.
 4. Submit a pull request.
 
-## 📜 License
 
-Add your chosen open-source license here.
-
----
-
-\<p align="center">
-&#x20; \<strong>Built with Python. Powered by MCP. Designed for AI agents.\</strong>
-&#x20; \<br/>
-&#x20; \<sub>TaskFlow MCP — Turning AI capabilities into actionable workflows.\</sub>
-\</p>
+**Built with Python. Powered by MCP. Designed for AI agents.**
